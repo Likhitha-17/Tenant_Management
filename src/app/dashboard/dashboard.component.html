@@ -1,0 +1,134 @@
+<div>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <div style="color: white;" class="navbar-brand">Tenant DashBoard</div>
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li *ngIf="authService!==null">
+          <a class="text-white">{{authService.authName}}</a>
+        </li>
+        <li>
+          <a (click)="authService.logout()">
+            <i class="fa fa-google" aria-hidden="true"></i>
+            Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="text-center">
+    <strong><h2>Hi {{authService.authName}}!! Welcome to Tenant Management</h2></strong>
+  </div>
+  <br>
+  <div class="text-center">
+    <!-- <p><strong>
+      Click on the Property Information button to get Property details.
+    </strong></p> -->
+    <p><strong>
+      Click on the Add Property button to add new property.
+    </strong></p>
+  </div>
+  <br>
+  <br>
+  <div class="text-center">
+    <!-- <button style="margin-left: 120px;"  (click)="getInfo()">Property Information</button> -->
+    <button><a style="text-decoration: none;" routerLink="/addproperty">ADD Property</a></button>
+  </div>
+  
+  <br>
+
+<div class="jumbotron">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Property Name</th>
+        <th>Rent</th>
+        <th>Location</th>
+        <th>Lease Time</th>
+        <th>Owner Email</th>
+        <th>Tenant Status</th>
+        <th>Payment Details</th>
+        <th>Updation</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let p of details">
+        <div *ngIf="!p.isEdit then display; else elseBlock">
+        </div>
+        <ng-template #display>
+          <td>
+            {{p.payload.val()["propertyName"]}}
+          </td>
+          <td>{{p.payload.val()["rent"]}}</td>
+          <td>{{p.payload.val()["location"]}}</td>
+          <td>{{p.payload.val()["leasetime"]}}</td>
+          <td>{{p.payload.val()["owner_email"]}}</td>
+          <td>
+
+            <div *ngIf="p.payload.val()['tenant_email']; else block">
+              {{p.payload.val()["tenant_email"]}}
+            </div>
+            <ng-template #block>
+              TNR
+            </ng-template>
+          </td>
+          <td>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"
+              (click)="showModal(p)">
+              Payment Details
+            </button>
+            <app-modal></app-modal>
+          </td>
+          <td>
+            <span><button class="btn btn-success" (click)="EditRecord(p)">Edit</button></span>
+            <span><button class="btn btn-danger" (click)="remove(p.key)">Remove</button></span>
+          </td>
+        </ng-template>
+        <ng-template #elseBlock>
+          <td>
+            <input type="text"  [(ngModel)]="p.editpname" class="form-control">
+          </td>
+          <td>
+            <input type="text" [(ngModel)]="p.editrent" class="form-control">
+          </td>
+          <td>
+            <input type="text" [(ngModel)]="p.editlocation" class="form-control">
+          </td>
+          <td>
+            <input type="text" [(ngModel)]="p.editleasetime" class="form-control">
+          </td>
+          <td>
+            <input type="text" [(ngModel)]="p.editowneremail" class="form-control">
+          </td>
+          <td *ngIf="p.payload.val()['tenant_email']; else btn">
+            <input type="text" [(ngModel)]="p.edittenantemail" class="form-control">
+          </td>
+          <ng-template #btn>
+            <td>
+              <button type="submit" (click)="propertyId(p)" class="btn btn-primary">Register</button>
+            </td>
+          </ng-template>
+          <td>
+            TNR
+          </td>
+          <td>
+            <span>
+              <a  class="btn btn-danger" (click)="p.isEdit = false">Cancel</a>
+              <a  class="btn btn-warning" (click)="Updaterecord(p)">Update</a>
+            </span>
+          </td>
+        </ng-template>
+
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br><br>
+<div class="text-center">
+  <p style="bottom: auto;">*TNR - Tenant Not Resgistered</p>
+</div>
+  
+</div>
+
+

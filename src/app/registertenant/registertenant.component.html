@@ -1,0 +1,21 @@
+<form (ngSubmit)="registerTenant(f)" #f="ngForm">
+    <div class="container">
+        <div class="jumbotron">
+            <h2>Register Tenant</h2>
+            <br>
+            <p>Please fill this form to register the tenant</p>
+
+            <hr>
+            <label for="tname"><b>Tenant Name</b></label>
+            <input type="text" placeholder="Tenant Name" name="tname" id="tname" required ngModel>
+
+            <label for="email"><b>Tenant Email</b></label><br>
+            <input type="email" placeholder="email" name="email" id="email" required ngModel>
+            <br>
+            <div class="text-center">
+                <button type="submit" class="registerbtn" >Register</button>
+            </div>
+
+        </div>
+    </div>
+</form>

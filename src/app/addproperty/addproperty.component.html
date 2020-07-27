@@ -1,0 +1,31 @@
+
+
+<form (ngSubmit)="createProperty(f)" #f="ngForm">
+    <div class="container">
+        <div class="jumbotron">
+            <h2>Register Property</h2>
+            <br>
+            <p>Please fill this form to register the property</p>
+
+            <hr>
+
+            <label for="pname"><b>Property Name</b></label><br>
+            <input type="text" placeholder="Property Name" name="pname" id="pname" required ngModel><br>
+
+            <label for="location"><b>Property Location</b></label><br>
+            <input type="text" placeholder="Location" name="location" id="location" required ngModel><br>
+
+            <label for="rent"><b>Property Rent</b></label><br>
+            <input type="text" placeholder="Rent" name="rent" id="rent" required ngModel><br>
+            <br>
+
+            <label for="leasetime"><b>Property Lease Time</b></label><br>
+            <input type="text" placeholder="Leasetime (In Months)" name="leasetime" id="leasetime" required ngModel><br>
+
+            <div class="text-center">
+                <button type="submit" class="registerbtn" >Register</button>
+            </div>
+
+        </div>
+    </div>
+</form>
